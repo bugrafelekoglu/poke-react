@@ -42,7 +42,7 @@
 }
 
 .content {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 40px auto;
   padding: 20px;
 }
@@ -50,6 +50,7 @@
 .pokemon-grid-container {
   display: flex;
   flex-flow: row wrap;
+  justify-content: space-between;
 
   .pokemon-grid-button {
     display: flex;
@@ -58,8 +59,8 @@
     justify-content: space-between;
     margin: 16px;
     // padding: 12px;
-    width: 120px;
-    height: 120px;
+    width: 180px;
+    height: 180px;
     border-radius: 16px;
     border: 2px solid $poke-blue;
     cursor: pointer;
