@@ -6,13 +6,18 @@ import PokemonGridButton from './PokemonGridButton'
 const PokemonGrid = () => {
 
   const [pokemonList, setPokemonList] = useState([])
+  const [limit, setLimit] = useState(20)
+  const [offset, setOffset] = useState(0)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
+  const limitOptions = [20, 40, 80, 160, 'All']
+
   useEffect(() => {
+    console.log(limit, 'bugra');
     setError(false)
     setLoading(true)
-    getPokemonList()
+    getPokemonList(limit, offset)
       .then(response => {
         setPokemonList(response.results)
       })
@@ -23,25 +28,38 @@ const PokemonGrid = () => {
       .finally(() => {
         setLoading(false)
       })
-  }, [])
+  }, [limit, offset])
 
   return (
-    <div className="pokemon-grid-container">
-      {
-        loading ? <span>Loading...</span> : 
+    <div>
+      {loading && <span>Loading...</span>}
+      {error && 
+        <span className="error-text" style={{padding: '12px 2px'}}>
+          Pokemon list data not reachable!
+        </span>
+      }
+      {!(loading || error) && 
         (
-          error ? 
-            <span className="error-text" style={{padding: '12px 2px'}}>
-              Pokemon list data not reachable!
-            </span>
+          _.isEmpty(pokemonList) ? 
+            <span>Pokemon list is empty!</span>
           :
           (
-            _.isEmpty(pokemonList) ? 
-              <span>Pokemon list is empty!</span>
-            :
-            _.map(pokemonList, (data, index) => {
-              return <PokemonGridButton key={index} pokeData={data}/>
-            })
+            <div className="pokemon-grid">
+              <select value={limit} onChange={(e) => {setLimit(e.target.value)}}>
+                {
+                  _.map(limitOptions, (opt, index) => {
+                    return <option key={index} value={_.isNumber(opt) ? opt : 99999}>{opt}</option>
+                  })
+                }
+              </select>
+              <div className="pokemon-grid-container">
+                {
+                  _.map(pokemonList, (data, index) => {
+                    return <PokemonGridButton key={index} pokeData={data}/>
+                  })
+                }
+              </div>
+            </div>
           )
         )
       }
