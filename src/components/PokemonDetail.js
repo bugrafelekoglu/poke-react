@@ -27,8 +27,10 @@ const PokemonDetail = () => {
   }, [id])
 
   return (
-    <div className="pokemon-detail-page">
-      {pokemonData.name} ({id}) detail page 
+    <div className="pokemon-detail">
+      <div>{loading && 'loading...'}</div>
+      <div>{error && 'error!'}</div>
+      {!(loading || error) && <div>{pokemonData.name} ({id}) detail page </div>}
     </div>
   )
 }
