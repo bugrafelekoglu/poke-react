@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react'
-import { useParams } from "react-router-dom";
 import { getPokemonData } from '../services/api'
 
-const PokemonDetail = () => {
-  const { id } = useParams();
-
+const PokemonDetail = (props) => {
+  const id = props.pokeId
   const [pokemonData, setPokemonData] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
