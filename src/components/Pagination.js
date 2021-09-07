@@ -26,10 +26,12 @@ const Pagination = ({ numberOfItems, limit, currentPage, handleLimit, handlePage
           _.times(pages, (index) => {
             return (
               <button 
-                onClick={(e) => { handlePage(e.target.value) }} 
+                onClick={(e) => { 
+                  (Number(currentPage) !== index + 1) && handlePage(e.target.value) 
+                }} 
                 key={index}
                 value={index + 1}
-                className={Number(currentPage) === index + 1 ? 'current-page' : ''}
+                className={Number(currentPage) === index + 1 ? 'current-page-button' : ''}
               >
                 {index + 1}
               </button>

@@ -145,9 +145,13 @@
       }
     }
 
-    .current-page {
+    .current-page-button {
       color: white;
       background-color: $poke-blue;
+
+      &:hover {
+        background-color: $poke-blue;
+      }
     }
   }
 }
