@@ -15,7 +15,7 @@ const PokemonGridButton = ({pokeData}) => {
   return ( 
     <Link to={`/pokemon/${pokeId}`} className="pokemon-grid-button">
       <div className="pokemon-img-container">
-        <img height="72" src={imageLink} alt={name} />
+        <img src={imageLink} alt={name} />
       </div>
       <div className="pokemon-name-container">
         <span style={{color: 'white'}}>{name}</span>
