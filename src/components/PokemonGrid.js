@@ -2,24 +2,25 @@ import _ from 'lodash'
 import { getPokemonList } from '../services/api'
 import { useState, useEffect } from 'react'
 import PokemonGridButton from './PokemonGridButton'
+import Pagination from './Pagination'
 
 const PokemonGrid = () => {
-
   const [pokemonList, setPokemonList] = useState([])
+  const [numOfAllPokemons, setNumOfAllPokemons] = useState(0) 
   const [limit, setLimit] = useState(20)
   const [offset, setOffset] = useState(0)
+  const [currentPage, setCurrentPage] = useState(1)
+
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
-  const limitOptions = [20, 40, 80, 160, 'All']
-
   useEffect(() => {
-    console.log(limit, 'bugra');
     setError(false)
     setLoading(true)
     getPokemonList(limit, offset)
       .then(response => {
         setPokemonList(response.results)
+        setNumOfAllPokemons(response.count)
       })
       .catch(error => {
         setError(true)
@@ -28,7 +29,19 @@ const PokemonGrid = () => {
       .finally(() => {
         setLoading(false)
       })
-  }, [limit, offset])
+  }, [limit, currentPage])
+
+
+  const handleLimit = (limit) => {
+    setLimit(limit)
+    setCurrentPage(1)
+    setOffset(0)
+  }
+
+  const handlePage = (currentPage) => {
+    setCurrentPage(currentPage)
+    setOffset((currentPage - 1) * limit)
+  }
 
   return (
     <div>
@@ -45,13 +58,6 @@ const PokemonGrid = () => {
           :
           (
             <div className="pokemon-grid">
-              <select value={limit} onChange={(e) => {setLimit(e.target.value)}}>
-                {
-                  _.map(limitOptions, (opt, index) => {
-                    return <option key={index} value={_.isNumber(opt) ? opt : 99999}>{opt}</option>
-                  })
-                }
-              </select>
               <div className="pokemon-grid-container">
                 {
                   _.map(pokemonList, (data, index) => {
@@ -59,6 +65,13 @@ const PokemonGrid = () => {
                   })
                 }
               </div>
+              <Pagination 
+                numberOfItems={numOfAllPokemons}
+                limit={limit} 
+                currentPage={currentPage} 
+                handleLimit={handleLimit}
+                handlePage={handlePage}
+              />
             </div>
           )
         )
