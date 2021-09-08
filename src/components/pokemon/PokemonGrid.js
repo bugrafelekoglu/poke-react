@@ -1,8 +1,8 @@
 import _ from 'lodash'
-import { getPokemonList } from '../services/api'
+import { getPokemonList } from '../../services/api'
 import { useState, useEffect } from 'react'
 import PokemonGridButton from './PokemonGridButton'
-import Pagination from './Pagination'
+import Pagination from '../Pagination'
 
 const PokemonGrid = () => {
   const [pokemonList, setPokemonList] = useState([])

@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 @import 'src/styles/_colors.scss';
+@import 'src/styles/_mixins.scss';
 
 * {
   margin: 0;
@@ -46,16 +47,21 @@
   padding: 20px;
 }
 
+.container {
+  .container-content {
+    @include container-properties;
+  }
+}
+
 .pokemon-grid-container {
+  @include container-properties;
   display: grid;
   grid-template-columns: repeat(auto-fit, 183px);
   grid-gap: 24px;
-  padding: 24px;
   justify-content: space-between;
   align-content: flex-start;
-  border: 2px solid $poke-yellow;
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
 
   .pokemon-grid-button {
     display: flex;

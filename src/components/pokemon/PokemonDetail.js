@@ -1,9 +1,11 @@
+import _ from 'lodash'
 import { useState, useEffect } from 'react'
-import { getPokemonData } from '../services/api'
+import { getPokemonData } from '../../services/api'
+import Container from '../Container'
 
-const PokemonDetail = (props) => {
-  const id = props.pokeId
-  const [pokemonData, setPokemonData] = useState([])
+const PokemonDetail = ({ pokeId }) => {
+  const id = pokeId
+  const [pokemonData, setPokemonData] = useState(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
 
@@ -28,7 +30,16 @@ const PokemonDetail = (props) => {
     <div className="pokemon-detail">
       <div>{loading && 'loading...'}</div>
       <div>{error && 'error!'}</div>
-      {!(loading || error) && <div>{pokemonData.name} ({id}) detail page </div>}
+      {
+        !(loading || error) && 
+        <div>
+          {_.get(pokemonData, 'name')} ({id}) detail page 
+
+          <Container title="test">
+            asdasd
+          </Container>
+        </div>
+      }
     </div>
   )
 }
