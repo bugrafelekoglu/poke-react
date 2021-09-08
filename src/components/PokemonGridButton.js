@@ -11,7 +11,7 @@ const PokemonGridButton = ({pokeData}) => {
   });
 
   const artworkLink = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${pokeId}.png`
-  const imageLink = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeId}.png`
+  // const imageLink = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeId}.png`
 
   return ( 
     <Link to={`/pokemon/${pokeId}`} className="pokemon-grid-button">

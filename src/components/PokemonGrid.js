@@ -29,7 +29,7 @@ const PokemonGrid = () => {
       .finally(() => {
         setLoading(false)
       })
-  }, [limit, currentPage])
+  }, [limit, currentPage, offset])
 
 
   const handleLimit = (limit) => {

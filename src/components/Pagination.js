@@ -7,7 +7,7 @@ const Pagination = ({ numberOfItems, limit, currentPage, handleLimit, handlePage
 
   useEffect(() => {
     setPages(_.ceil(numberOfItems / limit))
-  }, [limit])
+  }, [numberOfItems, limit])
 
   return (
     <div className="pagination-container">
